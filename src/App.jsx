@@ -1,3 +1,4 @@
+
 import {
   useAddress,
   useNetwork,
@@ -8,9 +9,8 @@ import {
 
 } from '@thirdweb-dev/react';
 import { ChainId } from '@thirdweb-dev/sdk';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { AddressZero } from '@ethersproject/constants';
-import { Chrono } from "react-chrono";
 const App = () => {
   // Use the hooks thirdweb give us.
   const address = useAddress();
@@ -23,12 +23,11 @@ const App = () => {
   const { contract: vote } = useContract("0xd562DB19A6b3832a8acc98ede8aB30DD3581C388", "vote");
   // Hook to check if the user has our NFT
   const { data: nftBalance } = useNFTBalance(editionDrop, address, "0")
-
   const hasClaimedNFT = useMemo(() => {
     return nftBalance && nftBalance.gt(0)
   }, [nftBalance])
   
-// chrono timeline
+//TODO app
 
   // Holds the amount of token each member has in state.
 const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
@@ -42,6 +41,8 @@ const shortenAddress = (str) => {
 const [proposals, setProposals] = useState([]);
 const [isVoting, setIsVoting] = useState(false);
 const [hasVoted, setHasVoted] = useState(false);
+
+
 // Retrieve all our existing proposals from the contract.
 useEffect(() => {
   if (!hasClaimedNFT) {
@@ -128,6 +129,7 @@ useEffect(() => {
   };
   getAllBalances();
 }, [hasClaimedNFT, token?.history]);
+
 
 // Now, we combine the memberAddresses and memberTokenAmounts into a single array
 const memberList = useMemo(() => {
@@ -320,6 +322,7 @@ const memberList = useMemo(() => {
   }
   // Render mint nft screen.
   return (
+    
     <div className="mint-nft">
       <h1>Mint your free👷MS DAO Membership NFT</h1>
       <div className="btn-hero">
