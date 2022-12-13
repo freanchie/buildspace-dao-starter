@@ -343,7 +343,7 @@ const memberList = useMemo(() => {
   if (address && (network?.[0].data.chain.id !== ChainId.Matic)) {
     return (
       <div className="unsupported-network">
-        <h2>Please connect to Goerli</h2>
+        <h2>Please connect to Matic Mumbai</h2>
         <p>
           This dapp only works on the Polygon Test network, please switch networks
           in your connected wallet.
